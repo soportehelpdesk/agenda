@@ -1,0 +1,20 @@
+{
+  "short_name": "Agenda",
+  "name": "Mi Agenda Académica",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192.png?text=Agenda",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://via.placeholder.com/512.png?text=Agenda",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#f2f2f7",
+  "theme_color": "#f2f2f7",
+  "display": "standalone"
+}

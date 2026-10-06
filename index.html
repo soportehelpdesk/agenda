@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Mi Agenda</title>
+
+  <!-- PWA Meta Tags para iOS -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mi Agenda">
+  <link rel="apple-touch-icon" href="https://via.placeholder.com/192.png?text=Agenda">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Mi Agenda</h1>
+  </header>
+
+  <main>
+    <!-- Formulario de entrada -->
+    <section class="card">
+      <h2>Añadir Evento</h2>
+      <form id="event-form">
+        <input type="text" id="title" placeholder="Título (ej. Examen de Fol)" required>
+        
+        <select id="type">
+          <option value="examen">Examen</option>
+          <option value="tarea">Tarea</option>
+          <option value="diario">Horario / Diario</option>
+        </select>
+
+        <input type="datetime-local" id="date" required>
+        <button type="submit">Guardar</button>
+      </form>
+    </section>
+
+    <!-- Lista de eventos -->
+    <section class="card">
+      <h2>Próximas Eventos</h2>
+      <ul id="event-list" class="event-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
