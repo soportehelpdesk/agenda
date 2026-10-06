@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Mi Agenda</title>
 
-  <!-- PWA Meta Tags para iOS -->
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,34 +15,96 @@
 </head>
 <body>
 
-  <header>
-    <h1>Mi Agenda</h1>
+  <header id="main-header">
+    <h1 id="tab-title">Exámenes</h1>
   </header>
 
   <main>
-    <!-- Formulario de entrada -->
-    <section class="card">
-      <h2>Añadir Evento</h2>
-      <form id="event-form">
-        <input type="text" id="title" placeholder="Título (ej. Examen de Fol)" required>
-        
-        <select id="type">
-          <option value="examen">Examen</option>
-          <option value="tarea">Tarea</option>
-          <option value="diario">Horario / Diario</option>
-        </select>
+    <!-- SECCIÓN: EXÁMENES -->
+    <section id="sec-examenes" class="tab-content active">
+      <div class="card">
+        <h2>Nuevo Examen</h2>
+        <form id="form-examen">
+          <input type="text" id="ex-title" placeholder="Asignatura / Nombre del examen" required>
+          <input type="datetime-local" id="ex-date" required>
+          <input type="text" id="ex-notes" placeholder="Aula, temas o notas (opcional)">
+          <button type="submit">Guardar Examen</button>
+        </form>
+      </div>
 
-        <input type="datetime-local" id="date" required>
-        <button type="submit">Guardar</button>
-      </form>
+      <div class="card">
+        <h2>Próximos Exámenes</h2>
+        <ul id="list-examenes" class="event-list"></ul>
+      </div>
     </section>
 
-    <!-- Lista de eventos -->
-    <section class="card">
-      <h2>Próximas Eventos</h2>
-      <ul id="event-list" class="event-list"></ul>
+    <!-- SECCIÓN: TAREAS -->
+    <section id="sec-tareas" class="tab-content">
+      <div class="card">
+        <h2>Nueva Tarea</h2>
+        <form id="form-tarea">
+          <input type="text" id="task-title" placeholder="Descripción de la tarea" required>
+          <select id="task-category">
+            <option value="clase">Clase</option>
+            <option value="personal">Personal</option>
+          </select>
+          <input type="date" id="task-date" required>
+          <button type="submit">Guardar Tarea</button>
+        </form>
+      </div>
+
+      <div class="segmented-control">
+        <button class="segment active" data-filter="todas">Todas</button>
+        <button class="segment" data-filter="clase">Clase</button>
+        <button class="segment" data-filter="personal">Personal</button>
+      </div>
+
+      <div class="card">
+        <ul id="list-tareas" class="event-list"></ul>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: HORARIO DIARIO -->
+    <section id="sec-horario" class="tab-content">
+      <div class="card">
+        <h2>Añadir Bloque al Horario</h2>
+        <form id="form-horario">
+          <select id="schedule-day">
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="0">Domingo</option>
+          </select>
+          <input type="time" id="schedule-time" required>
+          <input type="text" id="schedule-title" placeholder="Asignatura o actividad" required>
+          <button type="submit">Guardar en Horario</button>
+        </form>
+      </div>
+
+      <div id="schedule-container">
+        <!-- Se generan los días dinámicamente con JS -->
+      </div>
     </section>
   </main>
+
+  <!-- Navegación inferior (TabBar estilo iOS) -->
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="examenes">
+      <span class="icon">📝</span>
+      <span class="label">Exámenes</span>
+    </button>
+    <button class="tab-btn" data-tab="tareas">
+      <span class="icon">✅</span>
+      <span class="label">Tareas</span>
+    </button>
+    <button class="tab-btn" data-tab="horario">
+      <span class="icon">📅</span>
+      <span class="label">Horario</span>
+    </button>
+  </nav>
 
   <script src="app.js"></script>
 </body>
