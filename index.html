@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Mi Agenda</title>
 
+  <!-- PWA Meta Tags para iOS -->
   <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,7 +17,10 @@
 <body>
 
   <header id="main-header">
-    <h1 id="tab-title">Exámenes</h1>
+    <div class="header-content">
+      <h1 id="tab-title">Exámenes</h1>
+      <span id="sync-status" class="sync-status offline">Desconectado</span>
+    </div>
   </header>
 
   <main>
@@ -64,6 +68,26 @@
       </div>
     </section>
 
+    <!-- SECCIÓN: CALENDARIO MENSUAL -->
+    <section id="sec-calendario" class="tab-content">
+      <div class="card calendar-card">
+        <div class="calendar-header">
+          <button id="cal-prev" class="cal-nav-btn">‹</button>
+          <h2 id="cal-month-year">Octubre 2026</h2>
+          <button id="cal-next" class="cal-nav-btn">›</button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+        </div>
+        <div id="calendar-days" class="calendar-days-grid"></div>
+      </div>
+
+      <div class="card">
+        <h2 id="selected-date-title">Eventos del día seleccionado</h2>
+        <ul id="selected-day-list" class="event-list"></ul>
+      </div>
+    </section>
+
     <!-- SECCIÓN: HORARIO DIARIO -->
     <section id="sec-horario" class="tab-content">
       <div class="card">
@@ -100,12 +124,17 @@
       <span class="icon">✅</span>
       <span class="label">Tareas</span>
     </button>
+    <button class="tab-btn" data-tab="calendario">
+      <span class="icon">📆</span>
+      <span class="label">Calendario</span>
+    </button>
     <button class="tab-btn" data-tab="horario">
       <span class="icon">📅</span>
       <span class="label">Horario</span>
     </button>
   </nav>
 
-  <script src="app.js"></script>
+  <!-- Cargar Firebase SDK -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>
