@@ -2,55 +2,99 @@
   --bg: #f2f2f7;
   --card-bg: #ffffff;
   --primary: #007aff;
-  --text: #000000;
+  --primary-light: #e5f0ff;
+  --text: #1c1c1e;
   --border: #e5e5ea;
   --subtext: #8e8e93;
+  --accent-exam: #ff3b30;
+  --accent-personal: #af52de;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   margin: 0;
-  padding: env(safe-area-inset-top) 16px calc(70px + env(safe-area-inset-bottom)) 16px;
+  padding: env(safe-area-inset-top) 16px calc(80px + env(safe-area-inset-bottom)) 16px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 header {
-  padding: 16px 0 8px 0;
+  padding: 16px 0 12px 0;
+  position: sticky;
+  top: 0;
+  background: rgba(242, 242, 247, 0.85);
+  backdrop-filter: blur(15px);
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
+  letter-spacing: -0.5px;
   margin: 0;
+}
+
+/* Estado de Sincronización */
+.sync-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.sync-status.online {
+  background-color: #e5ffe9;
+  color: #34c759;
+}
+
+.sync-status.offline {
+  background-color: #e5e5ea;
+  color: var(--subtext);
 }
 
 .card {
   background: var(--card-bg);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 16px;
   margin-bottom: 16px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 h2 {
   font-size: 17px;
+  font-weight: 600;
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  letter-spacing: -0.2px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 input, select, button {
   font-size: 16px;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  border-radius: 10px;
   border: 1px solid var(--border);
-  background-color: #fafafa;
+  background-color: #f9f9fb;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  background-color: #ffffff;
 }
 
 button[type="submit"] {
@@ -59,6 +103,12 @@ button[type="submit"] {
   border: none;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 4px;
+  box-shadow: 0 2px 6px rgba(0, 122, 255, 0.25);
+}
+
+button[type="submit"]:active {
+  opacity: 0.85;
 }
 
 /* Control segmentado para filtros */
@@ -67,22 +117,24 @@ button[type="submit"] {
   background: #e3e3e8;
   border-radius: 9px;
   padding: 2px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .segment {
   flex: 1;
   background: transparent;
   border: none;
-  padding: 6px;
+  padding: 8px 0;
   font-size: 13px;
   font-weight: 500;
   border-radius: 7px;
+  color: var(--text);
+  cursor: pointer;
 }
 
 .segment.active {
   background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
   font-weight: 600;
 }
 
@@ -95,17 +147,17 @@ button[type="submit"] {
   display: block;
 }
 
-/* Tab Bar inferior */
+/* Tab Bar inferior estilo iOS */
 .tab-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: calc(50px + env(safe-area-inset-bottom));
+  height: calc(54px + env(safe-area-inset-bottom));
   padding-bottom: env(safe-area-inset-bottom);
-  background: rgba(249, 249, 249, 0.94);
+  background: rgba(249, 249, 249, 0.92);
   backdrop-filter: blur(20px);
-  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.18);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -120,6 +172,7 @@ button[type="submit"] {
   align-items: center;
   padding: 4px 0;
   color: var(--subtext);
+  cursor: pointer;
 }
 
 .tab-btn .icon {
@@ -129,13 +182,104 @@ button[type="submit"] {
 .tab-btn .label {
   font-size: 10px;
   margin-top: 2px;
+  font-weight: 500;
 }
 
 .tab-btn.active {
   color: var(--primary);
 }
 
-/* Elementos de listas */
+/* Estilos del Calendario Mensual */
+.calendar-card {
+  padding: 16px 12px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.cal-nav-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--primary);
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--subtext);
+  margin-bottom: 8px;
+}
+
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 14px;
+  position: relative;
+  cursor: pointer;
+}
+
+.cal-day.empty {
+  cursor: default;
+}
+
+.cal-day.today {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.cal-day.selected {
+  background-color: var(--primary);
+  color: white !important;
+}
+
+.dots-container {
+  display: flex;
+  gap: 2px;
+  position: absolute;
+  bottom: 4px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+}
+
+.dot-examen { background-color: var(--accent-exam); }
+.dot-tarea { background-color: var(--primary); }
+
+.cal-day.selected .dot {
+  background-color: white !important;
+}
+
+/* Listas de elementos */
 .event-list {
   list-style: none;
   padding: 0;
@@ -155,20 +299,22 @@ button[type="submit"] {
 }
 
 .badge {
-  font-size: 11px;
-  padding: 4px 8px;
+  font-size: 10px;
+  padding: 3px 7px;
   border-radius: 6px;
   font-weight: 600;
   text-transform: uppercase;
 }
 
-.badge-clase { background-color: #e5f0ff; color: #007aff; }
-.badge-personal { background-color: #f2e5ff; color: #af52de; }
+.badge-clase { background-color: var(--primary-light); color: var(--primary); }
+.badge-personal { background-color: #f2e5ff; color: var(--accent-personal); }
+.badge-examen { background-color: #ffe5e5; color: var(--accent-exam); }
 
 .delete-btn {
   background: none;
   border: none;
-  color: #ff3b30;
-  font-size: 18px;
-  padding: 0 4px;
+  color: var(--accent-exam);
+  font-size: 16px;
+  padding: 4px 8px;
+  cursor: pointer;
 }
